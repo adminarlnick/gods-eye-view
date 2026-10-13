@@ -1,0 +1,28 @@
+# Render Blueprint – God's Eye View auf dem kostenlosen Web-Service
+# Start ohne API-Schlüssel (Esri/OSM-Karte, OpenSky anonym). Optionale Schlüssel
+# (GOOGLE_MAPS_API_KEY, CESIUM_ION_TOKEN, OPENAI_API_KEY, …) im Render-Dashboard setzen.
+services:
+  - type: web
+    name: gods-eye-view
+    runtime: node
+    plan: free
+    region: frankfurt
+    buildCommand: npm ci && npm run build
+    startCommand: npm run preview
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: 24.19.0
+      - key: HOST
+        value: "0.0.0.0"
+      - key: OPENSKY_AUTH_MODE
+        value: anon
+      - key: PUPPETEER_SKIP_DOWNLOAD
+        value: "true"
+      - key: GEV_RATELIMIT_GOOGLE_PER_MIN
+        value: "60"
+      - key: GEV_RATELIMIT_OPENAI_PER_MIN
+        value: "30"
+      # Hostname des Render-Dienstes (Vite preview nimmt nur erlaubte Hosts an)
+      - key: GEV_ALLOWED_HOSTS
+        value: gods-eye-view.onrender.com
