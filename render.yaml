@@ -25,4 +25,4 @@ services:
         value: "30"
       # Hostname des Render-Dienstes (Vite preview nimmt nur erlaubte Hosts an)
       - key: GEV_ALLOWED_HOSTS
-        value: gods-eye-view.onrender.com
+        value: gods-eye-view-mr5a.onrender.com
